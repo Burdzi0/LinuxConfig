@@ -18,6 +18,9 @@ sudo apt-get install curl -y
 echo "Installing nix"
 curl https://nixos.org/nix/install | sh
 
+chmod +x ./home/burdzi0/.nix-profile/etc/profile.d/nix.sh
+./home/burdzi0/.nix-profile/etc/profile.d/nix.sh
+
 # Packages
 echo "Updating nix-channel..."
 nix-channel --update
@@ -39,7 +42,7 @@ packages=(
 for pack in ${packages[*]}
 do
     printf "Installing: %s\n" $pack
-    nix-env --quiet --dry-run --install $pack
+    nix-env --quiet --install $pack
     printf "Installing %s was %s \n" $pack `test_last $?`
 done
 
